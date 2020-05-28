@@ -1,0 +1,62 @@
+﻿@using BooksLibrary.Enums
+@model BooksLibrary.Managers.BookManager
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<script>
+    var selectedType = @(Html.Raw(Json.Encode(Model.SelectedType)));
+</script>
+
+<h3>List of books</h3>
+
+<select class="form-control" id="displayBook">
+    <option>All</option>
+    <option>Fantasy</option>
+    <option>Drama</option>
+    <option>Legend</option>
+</select>
+
+
+@foreach (var book in Model.typeBooks)
+{
+    <div class="@(book.BookState == BookState.Read ? "book-read" : book.BookState == BookState.NonActive ? "book-nonactive" : "book-active")" id="@book.BookId">
+        <div class="book-name">@book.Name</div>
+        <input type="button" class="btn btn-default btn-book changeState" value="Change state"/>
+        <input type="button" class="btn btn-danger btn-book removeBook"  value="Remove" />
+    </div>
+}
+
+<div class="book-type-popup">
+    <div class="book-type">Read</div>
+    <div class="book-type">Active</div>
+    <div class="book-type">NonActive</div>
+</div>
+
+<hr />
+<h3>Add new book</h3>
+@using (Html.BeginForm("AddBook", "Home"))
+{
+    <div class="form-group">
+        <label for="bookName">Name</label>
+        <input type="text" class="form-control" id="bookName" name="bookName" placeholder="Enter name">
+    </div>
+    <div class="form-group">
+        <label for="bookType">Type</label>
+        <select class="form-control" id="bookType" name="bookType">
+            <option>Fantasy</option>
+            <option>Drama</option>
+            <option>Legend</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="bookState">State</label>
+
+        <select class="form-control" id="bookState" name="bookState">
+            <option>Read</option>
+            <option>Active</option>
+            <option>NonActive</option>
+        </select>
+    </div>
+    <input type="submit" class="btn btn-primary" value="Add book" />
+}
