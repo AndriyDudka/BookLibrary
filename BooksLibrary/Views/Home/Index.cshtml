@@ -5,6 +5,7 @@
 }
 
 <script>
+    var bookManager = @(Html.Raw(Json.Encode(Model)));
     var selectedType = @(Html.Raw(Json.Encode(Model.SelectedType)));
 </script>
 
@@ -16,7 +17,6 @@
     <option>Drama</option>
     <option>Legend</option>
 </select>
-
 
 @foreach (var book in Model.typeBooks)
 {

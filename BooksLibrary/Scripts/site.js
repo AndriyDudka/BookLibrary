@@ -1,4 +1,5 @@
 ﻿$(function () {
+    var books;
     var n = 600000; //синхронізація з сервером кожні 10 хв
         setInterval(function() {
             $.ajax({
